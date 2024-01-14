@@ -42,7 +42,7 @@ export class AppComponent implements OnInit{
   public onOpenModal(currEmployee? : Employee): void{
     this.employee = <Employee>currEmployee;
   }
-  
+
   public onCreateEmployee(createForm : NgForm): void{
     this.employeeService.createEmployee(createForm.value).subscribe({
       error: (e) => {
@@ -58,12 +58,25 @@ export class AppComponent implements OnInit{
 
   public onUpdateEmployee(updateForm : NgForm): void{
     this.employeeService.updateEmployee(<Employee>updateForm.value).subscribe({
-      error: (e) => {
-        alert(e);
+      error: (error) => {
+        alert(error);
       },
       complete: () => {
         this.getEmployees();
+        updateForm.reset();
         document.getElementById("updateClose")?.click()
+      } 
+    })
+  }
+
+  public onDeleteEmployee(id:number): void{
+    this.employeeService.deleteEmployee(id).subscribe({
+      error: (error) => {
+        alert(error);
+      },
+      complete: () => {
+        this.getEmployees();
+        document.getElementById("deleteClose")?.click()
       } 
     })
   }

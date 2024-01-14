@@ -22,10 +22,10 @@
             <div *ngFor="let employee of employees" class="col-md-6 col-xl-4">
                 <div class="card m-b-30">
                     <div class="card-body row">
-                        <div class="col-6">
+                        <div class="col-3">
                             <a href=""><img src="{{employee?.imageUrl}}" alt="https://bootdey.com/img/Content/avatar/avatar7.png" class="img-fluid rounded-circle w-60"></a>
                         </div>
-                        <div class="col-6 card-title align-self-center mb-0">
+                        <div class="col-9 card-title align-self-center mb-0">
                             <h5>{{employee?.name}}</h5>
                             <p class="m-0">{{employee?.title}}</p>
                         </div>
@@ -45,6 +45,11 @@
             </div>
     
         </div>
+    </div>
+    <div *nfIf="employees?.length==0" class="container">
+      <div class="alert alert-secondary" role="alert">
+        A simple secondary alert—check it out!
+      </div>
     </div>
     <div class="container">
       <div class="modal fade" id="createEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -180,8 +185,8 @@
               <p>Are you sure you want to delete  <Strong>{{employee?.name}}</Strong>?</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Delete</button>
+              <button type="button" id="deleteClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" (click)="onDeleteEmployee(employee.id)" class="btn btn-primary">Delete</button>
             </div>
           </div>
         </div>
