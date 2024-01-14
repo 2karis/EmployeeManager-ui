@@ -1,3 +1,5 @@
+import { Timestamp } from "rxjs";
+
 export interface Employee{
     id: number;
     name: string;
@@ -6,4 +8,6 @@ export interface Employee{
     phone :string;
     imageUrl:string;
     employeeCode:string;
+    createdAt:Date;
+    updatedAt:Date;
 }

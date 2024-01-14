@@ -39,19 +39,16 @@ export class AppComponent implements OnInit{
     )
   }
 
-  
-
   public onOpenModal(currEmployee? : Employee): void{
     this.employee = <Employee>currEmployee;
   }
+  
   public onCreateEmployee(createForm : NgForm): void{
-    
     this.employeeService.createEmployee(createForm.value).subscribe({
       error: (e) => {
         alert(e);
       },
       complete: () => {
-        //this.employees.concat(<Employee>createForm.value);
         this.getEmployees();
         createForm.reset();
         document.getElementById("createClose")?.click()
@@ -65,7 +62,6 @@ export class AppComponent implements OnInit{
         alert(e);
       },
       complete: () => {
-        //this.employees.concat(<Employee>createForm.value);
         this.getEmployees();
         document.getElementById("updateClose")?.click()
       } 
