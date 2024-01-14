@@ -15,8 +15,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class AppComponent implements OnInit{
   public employees : Employee[];
 
+  public employee : Employee;
+
   constructor(private employeeService : EmployeeService){
     this.employees = [];
+    this.employee = <Employee>{};
   }
 
   ngOnInit(): void {
@@ -26,11 +29,16 @@ export class AppComponent implements OnInit{
     this.employeeService.getEmployees().subscribe(
       (response: Employee[])=>{
         this.employees=response;
-        console.log(this.employees)
+        console.log(this.employees);
       },
       (error :HttpErrorResponse)=>{
-        alert(error.message)
+        alert(error.message);
       }
     )
+  }
+
+  public onOpenModal(currEmployee? : Employee): void{
+    this.employee = <Employee>currEmployee;
+    console.log(currEmployee);
   }
 }
