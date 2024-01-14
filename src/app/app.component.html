@@ -1,4 +1,185 @@
-<h3>employees</h3>
-<div *ngFor="let employee of employees">
-  <div>{{employee.name}}</div>
-</div>
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" (click)="onOpenModal()" type="button" data-toggle="modal" data-target="#createEmployeeModal" >Add Employee</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+
+    <div class="container" id="main-container">
+        <div class="row">
+            <div *ngFor="let employee of employees" class="col-md-6 col-xl-3">
+                <div class="card m-b-30">
+                    <div class="card-body row">
+                        <div class="col-6">
+                            <a href=""><img src="{{employee?.imageUrl}}" alt="https://bootdey.com/img/Content/avatar/avatar7.png" class="img-fluid rounded-circle w-60"></a>
+                        </div>
+                        <div class="col-6 card-title align-self-center mb-0">
+                            <h5>{{employee?.name}}</h5>
+                            <p class="m-0">{{employee?.title}}</p>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="fa fa-envelope float-right"></i><a href="#">{{employee?.email}}</a></li>
+                        <li class="list-group-item"><i class="fa fa-phone float-right"></i>phone : {{employee?.phone}}</li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="float-right btn-group btn-group-sm">
+                            <a (click)="onOpenModal(employee)" type="button" data-toggle="modal" data-target="#readEmployeeModal"><i class="fa fa-eye"></i> </a>
+                            <a (click)="onOpenModal(employee)" type="button" data-toggle="modal" data-target="#updateEmployeeModal"><i class="fa fa-pencil"></i></a>
+                            <a (click)="onOpenModal(employee)" type="button" data-toggle="modal" data-target="#deleteEmployeeModal"><i class="fa fa-times"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    <div class="container">
+      <div class="modal fade" id="createEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Create new Employee</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="name" class="col-form-label">name:</label>
+                  <input type="text" class="form-control" id="name">
+                </div>
+                <div class="form-group">
+                  <label for="email" class="col-form-label">email:</label>
+                  <input type="text" class="form-control" id="email">
+                </div>
+                <div class="form-group">
+                  <label for="title" class="col-form-label">title:</label>
+                  <input type="text" class="form-control" id="title">
+                </div>
+                <div class="form-group">
+                  <label for="phone" class="col-form-label">phone:</label>
+                  <input type="text" class="form-control" id="phone">
+                </div>
+                <div class="form-group">
+                  <label for="imageUrl" class="col-form-label">imageUrl:</label>
+                  <input type="text" class="form-control" id="imageUrl">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Create</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal fade" id="readEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Read Employee</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="card m-b-30">
+                <div class="card-body row">
+                    <div class="col-6">
+                        <a href=""><img src="{{employee?.imageUrl}}" alt="https://bootdey.com/img/Content/avatar/avatar7.png" class="img-fluid rounded-circle w-60"></a>
+                    </div>
+                    <div class="col-6 card-title align-self-center mb-0">
+                        <h5>{{employee?.name}}</h5>
+                        <p class="m-0">{{employee?.title}}</p>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i><a href="#">{{employee?.email}}</a></li>
+                    <li class="list-group-item"><i class="fa fa-phone float-right"></i>phone : {{employee?.phone}}</li>
+                </ul>
+            </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal fade" id="updateEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Update Employee</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="name" class="col-form-label">name:</label>
+                  <input type="text" class="form-control" id="name" value="{{employee?.name}}">
+                </div>
+                <div class="form-group">
+                  <label for="email" class="col-form-label">email:</label>
+                  <input type="text" class="form-control" id="email" value="{{employee?.email}}">
+                </div>
+                <div class="form-group">
+                  <label for="title" class="col-form-label">title:</label>
+                  <input type="text" class="form-control" id="title" value="{{employee?.title}}">
+                </div>
+                <div class="form-group">
+                  <label for="phone" class="col-form-label">phone:</label>
+                  <input type="text" class="form-control" id="phone" value="{{employee?.phone}}">
+                </div>
+                <div class="form-group">
+                  <label for="imageUrl" class="col-form-label">imageUrl:</label>
+                  <input type="text" class="form-control" id="imageUrl" value="{{employee?.imageUrl}}">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete Employee </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete  <Strong>{{employee?.name}}</Strong>?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                           
+    </div>
