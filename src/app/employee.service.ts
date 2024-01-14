@@ -20,7 +20,7 @@ export class EmployeeService {
   public getEmployee(id : number):Observable<Employee>{
     return this.http.get<Employee>(`${this.appServerUrl}/employee/read/${id}`)
   }
-  public addEmployee(empolyee : Employee):Observable<Employee>{
+  public createEmployee(empolyee : Employee):Observable<Employee>{
     return this.http.post<Employee>(`${this.appServerUrl}/employee/create`, empolyee)
   }
 

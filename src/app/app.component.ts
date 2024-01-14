@@ -4,11 +4,12 @@ import { RouterOutlet } from '@angular/router';
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 import { HttpErrorResponse } from '@angular/common/http';
+ import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet,FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.getEmployees();
   }
+
   public getEmployees(): void{
     this.employeeService.getEmployees().subscribe(
       (response: Employee[])=>{
@@ -40,5 +42,19 @@ export class AppComponent implements OnInit{
   public onOpenModal(currEmployee? : Employee): void{
     this.employee = <Employee>currEmployee;
     console.log(currEmployee);
+  }
+  public onCreateEmployee(createForm : NgForm): void{
+    this.employeeService.createEmployee(createForm.value).subscribe({
+      error: (e) => {
+        alert(e);
+      },
+      complete: () => {
+        //this.employees.concat(<Employee>createForm.value);
+        this.getEmployees();
+        this.employee=<Employee>{};
+        console.log(createForm.value)
+        document.getElementById("createClose")?.click()
+      } 
+  })
   }
 }
